@@ -1,0 +1,134 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+" the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+let mapleader = " "
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+""" Open and edit this file easily ----------
+nmap \e :e ~/.ideavimrc<CR>
+nmap \r :source ~/.ideavimrc<CR>
+
+""" Common settings -------------------------
+set scrolloff=8
+
+set number
+set relativenumber
+
+set incsearch
+set ignoresearch
+set wrapscan
+set showcmd
+
+""" Idea specific settings ------------------
+set ideajoin
+set idearefactormode=keep
+set showmode
+
+""" Vim Mappings --------------------------------
+vmap J :m '>+1<CR>gv=gv
+vmap K :m '<-2<CR>gv=gv
+nmap J "mzJ`z"
+
+" Stay centered while navigating by half screen
+nmap <C-d> <C-d>zz
+nmap <C-u> <C-u>zz
+
+" I don't like <C-w>
+nmap <leader>ww <C-w>w
+nmap <leader>wo <C-w>o
+nmap <leader>wp <C-w>p
+nmap <leader>wh <C-w>h
+nmap <leader>wj <C-w>j
+nmap <leader>wk <C-w>k
+nmap <leader>wl <C-w>l
+
+" Use register h for global replace
+nmap <leader>s viw"hy:%s/\<<C-r>h\>/<C-r>h/gI<Left><Left><Left>
+
+""" IDE Mappings --------------------------------
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" Open Terminal anytime anywhere
+nmap <leader>ot <Action>(ActivateTerminalToolWindow)
+nmap <leader>oT <Action>(Terminal.OpenInTerminal)
+
+" Open and close reference panes
+nmap <c-\> <Action>(SplitVertically)
+nmap <c--> <Action>(SplitHorizontally)
+nmap <c-=> <Action>(Unsplit)
+
+" Hide/ show extra info when grokking
+nmap zc <Action>(CollapseRegion)
+nmap zo <Action>(ExpandRegion)
+nmap <leader>zc <Action>(CollapseAllRegions)
+nmap <leader>zo <Action>(ExpandAllRegions)
+nmap <C-z> <Action>(ToggleDistractionFreeMode)
+
+" Git commands
+nmap <leader>ga <Action>(Git.Stage.Add)
+nmap <leader>gb <Action>(Git.Branch)
+nmap <leader>gf <Action>(Git.Pull)
+nmap <leader>gr <Action>(Git.Rebase)
+nmap <leader>gp <Action>(Git.Push)
+nmap <leader>gt <Action>(Git.Tag)
+nmap <leader>gs <Action>(Git.Stash)
+nmap <leader>gj <Action>(Vcs.Show.Local.Changes)
+nmap <leader>pr <Action>(Github.Create.Pull.Request)
+
+" Refactoring
+nmap <leader>f <Action>(ReformatCode)
+nmap <leader>rr <Action>(RenameElement)
+nmap <leader>rf <Action>(RenameFile)
+nmap <leader>rem <Action>(ExtractMethod)
+nmap <leader>rei <Action>(ExtractInterface)
+nmap <leader>rv <Action>(IntroduceVariable)
+nmap <leader>rp <Action>(IntroduceParameter)
+
+" Navigation
+nmap <leader>nf <Action>(GoToFile)
+nmap <leader>nc <Action>(GoToClass)
+nmap <leader>bt <Action>(ToggleBookmark)
+nmap <leader>bs <Action>(ShowBookmarks)
+nmap <leader>bj <Action>(GotoNextBookmark)
+nmap <leader>bk <Action>(GotoPreviousBookmark)
+nmap <leader>fu <Action>(ShowUsages)
+nmap <leader>fr <Action>(Replace)
+nmap <leader>mb <Action>(EditorMatchBrace)
+map <leader>j }
+map <leader>k {
+map <leader>h <Action>(EditorCodeBlockStart)
+map <leader>l <Action>(EditorCodeBlockEnd)
+
+" Editing
+nmap <leader>cl <Action>(CommentByLineComment)
+nmap <leader>cb <Action>(CommentByBlockComment)
+nmap <leader>a <Action>($SelectAll)
+nmap <leader>i <Action>(JumpToLastChange)
+nmap <leader>oi <Action>(OptimizeImports)
+
+nmap <S-Space> <Action>(GotoNextError)
+
+" Testing
+nmap <leader>tt <Action>(RerunTests)
+nmap <leader>tr <Action>(RerunFailedTests)
+nmap <leader>tc <Action>(RunCoverage)
+nmap <leader>tn <Action>(GotoTest)
+
+" Debugging
+nmap <leader>dd <Action>(Debug)
+nmap <leader>dc <Action>(DebugClass)
+nmap <leader>dr <Action>(Resume)
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>de <Action>(ToggleBreakpointEnabled)
+nmap <leader>ds <Action>(Stop)
