@@ -42,3 +42,16 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+-- Soft wrapping for text files
+vim.api.nvim_create_augroup("FiletypeSpecificOptions", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "FiletypeSpecificOptions",
+    pattern = "*",
+    command = "setlocal nowrap",
+})
+vim.api.nvim_create_autocmd("FileType", {
+    group = "FiletypeSpecificOptions",
+    pattern = {"markdown", "text"},
+    command = "setlocal wrap linebreak",
+})

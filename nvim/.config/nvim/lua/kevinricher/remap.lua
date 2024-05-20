@@ -42,3 +42,16 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- Soft wrapping for text files
+vim.api.nvim_create_augroup("FiletypeSpecificOptions", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "FiletypeSpecificOptions",
+    pattern = "*",
+    command = "setlocal nowrap",
+})
+vim.api.nvim_create_autocmd("FileType", {
+    group = "FiletypeSpecificOptions",
+    pattern = {"markdown", "text"},
+    command = "setlocal wrap",
+})

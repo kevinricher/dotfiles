@@ -12,6 +12,9 @@ return {
                 quit_on_open = true,
             },
         },
+        view = {
+          side = "right",
+      },
         filters = {
             dotfiles = false,
         },
@@ -22,7 +25,7 @@ return {
 
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
-    vim.keymap.set("n", "<leader>n", ":NvimTreeFindFileToggle<CR>")
+    vim.keymap.set("n", "<leader>no", ":NvimTreeFindFileToggle<CR>")
 
   end,
 }
