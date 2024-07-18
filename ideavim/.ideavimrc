@@ -11,6 +11,11 @@ let mapleader = " "
 Plug 'machakann/vim-highlightedyank'
 " Commentary plugin
 Plug 'tpope/vim-commentary'
+" File tree explorer
+Plug 'preservim/nerdtree'
+
+set which-key
+set timeoutlen=60000
 
 """ Open and edit this file easily ----------
 nmap \e :e ~/.ideavimrc<CR>
@@ -55,13 +60,142 @@ nmap <leader>s viw"hy:%s/\<<C-r>h\>/<C-r>h/gI<Left><Left><Left>
 
 """ IDE Mappings --------------------------------
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+" Thanks https://github.com/Infonautica
 
 " Don't use Ex mode, use Q for formatting.
 map Q gq
 
-" Open Terminal anytime anywhere
+" Find commands
+let g:WhichKeyDesc_find = "<leader>f Find"
+
+nmap <leader>ff <Action>(GotoFile)
+let g:WhichKeyDesc_find_file = "<leader>ff Find File"
+
+nmap <leader>fr <Action>(RecentFiles)
+let g:WhichKeyDesc_find_recent = "<leader>fr Find Recent File"
+
+nmap <leader>fw <Action>(FindInPath)
+let g:WhichKeyDesc_find_word = "<leader>fw Find Word"
+
+nmap <leader>fa <Action>(GotoAction)
+let g:WhichKeyDesc_find_action = "<leader>fa Find Action"
+
+
+" Go to commands
+let g:WhichKeyDesc_goto = "g Go To"
+
+nmap <leader>gb <Action>(EditorMatchBrace)
+let g:WhichKeyDesc_goto_matching_brace = "g Go To Matching Brace"
+
+nmap gc <Action>(GoToClass)
+let g:WhichKeyDesc_goto_class = "gd Go To Class"
+
+nmap gd <Action>(GotoDeclaration)
+let g:WhichKeyDesc_goto_definition = "gd Go To Definition"
+
+nmap gi <Action>(GotoImplementation)
+let g:WhichKeyDesc_goto_implementation = "gi Go To Implementation"
+
+nmap gr <Action>(ShowUsages)
+let g:WhichKeyDesc_goto_references = "gr Go To References"
+
+
+" Git commands
+let g:WhichKeyDesc_git = "<leader>g Git"
+
+nmap <leader>gp <Action>(Vcs.QuickListPopupAction)
+let g:WhichKeyDesc_git_popup = "<leader>gp Git Popup"
+
+nmap <leader>gd <Action>(Compare.SameVersion)
+let g:WhichKeyDesc_git_diff = "<leader>gd Git Diff"
+
+nmap <leader>gr <Action>(Vcs.RollbackChangedLines)
+let g:WhichKeyDesc_git_reset = "<leader>gr Git Reset"
+
+nmap <leader>gb <Action>(Annotate)
+let g:WhichKeyDesc_git_blame = "<leader>gb Git Blame"
+
+
+" Close commands
+let g:WhichKeyDesc_close = "<leader>x Close"
+
+nmap <leader>xn <Action>(CloseAllNotifications)
+let g:WhichKeyDesc_close_notifications = "<leader>xn Close Notifications"
+
+nmap <leader>xt <Action>(HideActiveWindow)
+let g:WhichKeyDesc_close_tool = "<leader>xt Close Tool"
+
+
+" Refactoring commands
+let g:WhichKeyDesc_refactor = "<leader>r Refactor"
+
+nmap <leader>rc <Action>(ReformatCode)
+let g:WhichKeyDesc_refactor_reformat_code = "<leader>r Refactor Reformat Code"
+
+nmap <leader>re <Action>(RenameElement)
+let g:WhichKeyDesc_refactor_rename_element = "<leader>re Refactor Rename Element"
+
+nmap <leader>rf <Action>(RenameFile)
+let g:WhichKeyDesc_refactor_rename_file = "<leader>rf Refactor Rename File"
+
+nmap <leader>rm <Action>(ExtractMethod)
+let g:WhichKeyDesc_refactor_extract_method = "<leader>rm Refactor Extract Method"
+
+nmap <leader>ri <Action>(ExtractInterface)
+let g:WhichKeyDesc_refactor_extract_interface = "<leader>ri Refactor Extract Interface"
+
+nmap <leader>rv <Action>(IntroduceVariable)
+let g:WhichKeyDesc_refactor_introduce_variable = "<leader>rv Refactor Introduce Variable"
+
+nmap <leader>rp <Action>(IntroduceParameter)
+let g:WhichKeyDesc_refactor_introduce_parameter = "<leader>rp Refactor Introduce Parameter"
+
+
+" LSP commands
+let g:WhichKeyDesc_lsp = "<leader>l LSP"
+
+nmap <leader>lh <Action>(ShowHoverInfo)
+let g:WhichKeyDesc_lsp_hover_info = "<leader>lh Show Hover Info"
+
+nmap <leader>ld <Action>(ShowErrorDescription)
+let g:WhichKeyDesc_lsp_show_error = "<leader>ld Show Error"
+
+nmap <leader>lD <Action>(ActivateProblemsViewToolWindow)
+let g:WhichKeyDesc_lsp_show_all_errors = "<leader>lD Show All Errors"
+
+nmap <leader>lu <Action>(ShowUsages)
+let g:WhichKeyDesc_lsp_show_usages = "<leader>lD Show Usages"
+
+" Debugger commands
+let g:WhichKeyDesc_debug = "<leader>d Debugger"
+
+nmap <leader>dt <Action>(ToggleLineBreakpoint)
+let g:WhichKeyDesc_debug_toggle_breakpoint = "<leader>dt Toggle Break Point"
+
+nmap <leader>de <Action>(ToggleBreakpointEnabled)
+let g:WhichKeyDesc_debug_toggle_breakpoint_enabled = "<leader>dt Toggle Break Point Enabled"
+
+nmap <leader>ds <Action>(Run)
+let g:WhichKeyDesc_debug_start = "<leader>dr Run (Start)"
+
+nmap <leader>dd <Action>(Debug)
+let g:WhichKeyDesc_debug_debug = "<leader>dd Debug Run"
+
+nmap <leader>dr <Action>(Resume)
+let g:WhichKeyDesc_debug_resume = "<leader>dr Toggle Break Point"
+
+nmap <leader>ds <Action>(Stop)
+let g:WhichKeyDesc_debug_stop = "<leader>ds Debug Stop"
+
+
+" Open commands
+let g:WhichKeyDesc_open = "<leader>o Open"
+
 nmap <leader>ot <Action>(ActivateTerminalToolWindow)
+let g:WhichKeyDesc_open_terminal = "<leader>ot Open Terminal Window"
+
 nmap <leader>oT <Action>(Terminal.OpenInTerminal)
+let g:WhichKeyDesc_open_in_terminal = "<leader>oT Open in Terminal"
 
 " Open and close reference panes
 nmap <c-\> <Action>(SplitVertically)
@@ -69,66 +203,67 @@ nmap <c--> <Action>(SplitHorizontally)
 nmap <c-=> <Action>(Unsplit)
 
 " Hide/ show extra info when grokking
+let g:WhichKeyDesc_zoom_all = "<leader>z Zoom All"
+let g:WhichKeyDesc_zoom = "z Zoom"
+
+
 nmap zc <Action>(CollapseRegion)
+let g:WhichKeyDesc_zoom_collapse_region = "zc Zoom Collapse Region"
+
 nmap zo <Action>(ExpandRegion)
+let g:WhichKeyDesc_zoom_open_region = "zo Zoom Open Region"
+
 nmap <leader>zc <Action>(CollapseAllRegions)
+let g:WhichKeyDesc_zoom = "<leader>zc Zoom Collapse All Regions"
+
 nmap <leader>zo <Action>(ExpandAllRegions)
-nmap <C-z> <Action>(ToggleDistractionFreeMode)
+let g:WhichKeyDesc_zoom = "<leader>zo Zoom Open All Regions"
 
-" Git commands
-nmap <leader>ga <Action>(Git.Stage.Add)
-nmap <leader>gb <Action>(Git.Branch)
-nmap <leader>gf <Action>(Git.Pull)
-nmap <leader>gr <Action>(Git.Rebase)
-nmap <leader>gp <Action>(Git.Push)
-nmap <leader>gt <Action>(Git.Tag)
-nmap <leader>gs <Action>(Git.Stash)
-nmap <leader>gj <Action>(Vcs.Show.Local.Changes)
-nmap <leader>pr <Action>(Github.Create.Pull.Request)
+nmap <leader>zz <Action>(ToggleDistractionFreeMode)
+let g:WhichKeyDesc_zoom_distraction_free = "<leader>zz Zoom Distraction Free"
 
-" Refactoring
-nmap <leader>f <Action>(ReformatCode)
-nmap <leader>rr <Action>(RenameElement)
-nmap <leader>rf <Action>(RenameFile)
-nmap <leader>rem <Action>(ExtractMethod)
-nmap <leader>rei <Action>(ExtractInterface)
-nmap <leader>rv <Action>(IntroduceVariable)
-nmap <leader>rp <Action>(IntroduceParameter)
 
-" Navigation
-nmap <leader>nf <Action>(GoToFile)
-nmap <leader>nc <Action>(GoToClass)
+" Bookmark commands
+let g:WhichKeyDesc_bookmark = "<leader>b Bookmark"
+
 nmap <leader>bt <Action>(ToggleBookmark)
+let g:WhichKeyDesc_bookmark_toggle = "<leader>bt Bookmark Toggle"
+
 nmap <leader>bs <Action>(ShowBookmarks)
-nmap <leader>bj <Action>(GotoNextBookmark)
-nmap <leader>bk <Action>(GotoPreviousBookmark)
-nmap <leader>fu <Action>(ShowUsages)
-nmap <leader>fr <Action>(Replace)
-nmap <leader>mb <Action>(EditorMatchBrace)
-map <leader>j }
-map <leader>k {
+let g:WhichKeyDesc_bookmark_show = "<leader>bs Bookmark Show"
+
+nmap <leader>bn <Action>(GotoNextBookmark)
+let g:WhichKeyDesc_bookmark_goto_next = "<leader>bn Bookmark Go To Next"
+
+nmap <leader>bp <Action>(GotoPreviousBookmark)
+let g:WhichKeyDesc_bookmark_goto_previous = "<leader>bp Bookmark Go To Previous"
+
+
+map J }
+map K {
 map <leader>h <Action>(EditorCodeBlockStart)
 map <leader>l <Action>(EditorCodeBlockEnd)
 
 " Editing
-nmap <leader>cl <Action>(CommentByLineComment)
-nmap <leader>cb <Action>(CommentByBlockComment)
-nmap <leader>a <Action>($SelectAll)
+nmap <leader>c <Action>(CommentByLineComment)
+let g:WhichKeyDesc_comment_line = "<leader>c Comment Line"
+
+nmap <leader>C <Action>(CommentByBlockComment)
+let g:WhichKeyDesc_comment_block = "<leader>C Comment Block"
+
 nmap <leader>i <Action>(JumpToLastChange)
-nmap <leader>oi <Action>(OptimizeImports)
 
-nmap <S-Space> <Action>(GotoNextError)
+" Testing commands
+let g:WhichKeyDesc_test = "<leader>t Test"
 
-" Testing
-nmap <leader>tt <Action>(RerunTests)
-nmap <leader>tr <Action>(RerunFailedTests)
+nmap <leader>tr <Action>(RerunTests)
+let g:WhichKeyDesc_test_run = "<leader>tr Test Rerun"
+
+nmap <leader>tf <Action>(RerunFailedTests)
+let g:WhichKeyDesc_test_run_failed = "<leader>tf Test Rerun Failed"
+
 nmap <leader>tc <Action>(RunCoverage)
-nmap <leader>tn <Action>(GotoTest)
+let g:WhichKeyDesc_test_run_coverage = "<leader>tc Test Run Coverage"
 
-" Debugging
-nmap <leader>dd <Action>(Debug)
-nmap <leader>dc <Action>(DebugClass)
-nmap <leader>dr <Action>(Resume)
-nmap <leader>db <Action>(ToggleLineBreakpoint)
-nmap <leader>de <Action>(ToggleBreakpointEnabled)
-nmap <leader>ds <Action>(Stop)
+nmap <leader>tg <Action>(GotoTest)
+let g:WhichKeyDesc_test_goto = "<leader>tg Test GoTo"

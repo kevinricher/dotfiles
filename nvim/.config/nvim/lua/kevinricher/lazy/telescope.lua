@@ -20,21 +20,21 @@ return {
 			require("telescope").load_extension("ui-select")
 
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>jh", builtin.help_tags, {})
-			vim.keymap.set("n", "<leader>jk", builtin.keymaps, {})
-			vim.keymap.set("n", "<leader>jf", builtin.find_files, {})
-			vim.keymap.set("n", "<leader>js", builtin.builtin, {})
-			vim.keymap.set("n", "<leader>jg", builtin.git_files, {})
+			vim.keymap.set("n", "<leader>jh", builtin.help_tags, { desc = "[J]ump [H]elp tags" })
+			vim.keymap.set("n", "<leader>jk", builtin.keymaps, { desc = "[J]ump [K]eymaps" })
+			vim.keymap.set("n", "<leader>jf", builtin.find_files, { desc = "[J]ump [F]iles" })
+			vim.keymap.set("n", "<leader>jb", builtin.builtin, { desc = "[J]ump [B]uiltin" })
+			vim.keymap.set("n", "<leader>jg", builtin.git_files, { desc = "[J]ump [G]it files" })
 			vim.keymap.set("n", "<leader>jw", function()
 				builtin.grep_string({ search = vim.fn.input("Grep > ") })
-			end)
-			vim.keymap.set("n", "<leader>jr", builtin.resume, {})
-			vim.keymap.set("n", "<leader>jd", builtin.diagnostics, {})
-			vim.keymap.set("n", "<leader>j.", builtin.oldfiles, {})
+			end, { desc = "[J]ump [W]ord" })
+			vim.keymap.set("n", "<leader>jr", builtin.resume, { desc = "[J]ump [R]esume" })
+			vim.keymap.set("n", "<leader>jd", builtin.diagnostics, { desc = "[J]ump [D]iagnostics" })
+			vim.keymap.set("n", "<leader>jo", builtin.oldfiles, { desc = "[J]ump [O]ldfiles"})
 
 			vim.keymap.set("n", "<leader>jn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[F]ind [N]eovim files" })
+			end, { desc = "[J]ump [N]eovim files" })
 		end,
 	},
 }
