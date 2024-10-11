@@ -12,6 +12,7 @@ return {
 				"html",
 				"css",
 				"javascript",
+        "astro",
         "jsdoc",
 				"typescript",
 				"go",
