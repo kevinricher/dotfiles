@@ -97,6 +97,8 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/miniconda3/condabin"
 export PATH="$PATH:$HOME/miniconda3/condabin"
 export PATH="$PATH:$HOME/miniconda3/bin"
 export PATH=$PATH:/opt/homebrew/bin
